@@ -171,9 +171,7 @@ function App() {
   const fetchData = async (endpoint, modeName) => {
     setLoading(true);
     try {
-      // Temporarily hard-code for testing
-      const API_BASE_URL = 'https://studybuddy-rptf.onrender.com';
-      console.log('Using API URL:', API_BASE_URL); // Add this to verify
+      const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://studybuddy-rptf.onrender.com';
       const res = await axios.post(`${API_BASE_URL}/api/${endpoint}/`, { topic });
       setData(res.data);
       setMode(modeName);
