@@ -25,9 +25,10 @@ body {
   overflow-x: hidden; 
 }
 
+/* --- TOP NAVIGATION BAR --- */
 .app-header {
   width: 100%;
-  padding: 0.8rem 1rem; /* Slightly reduced padding */
+  padding: 1rem;
   box-sizing: border-box;
   display: flex;
   justify-content: space-between;
@@ -39,53 +40,14 @@ body {
   left: 0;
   z-index: 100;
   backdrop-filter: blur(5px);
-  gap: 0.5rem; /* Ensure space between title and timer */
 }
 
 h1 { 
-  font-size: 1.4rem; /* Slightly smaller for mobile safety */
+  font-size: 1.5rem; 
   margin: 0;
   color: var(--primary-color);
   font-weight: 800;
   letter-spacing: -1px;
-  flex-shrink: 1; /* Allow title to shrink if needed */
-}
-
-/* --- POMODORO TIMER STYLES --- */
-.pomodoro {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem; /* Reduced gap */
-  background: rgba(255, 255, 255, 0.05);
-  padding: 0.4rem 0.8rem;
-  border-radius: 50px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  transition: all 0.3s ease;
-  flex-shrink: 0; /* Prevent timer from squishing */
-  white-space: nowrap; /* Force single line */
-  flex-wrap: nowrap; /* Force single line */
-}
-
-.pomodoro:hover {
-  background: rgba(255, 255, 255, 0.1);
-  border-color: var(--primary-color);
-}
-
-.timer-display {
-  font-family: 'JetBrains Mono', monospace; 
-  font-size: 1rem;
-  font-weight: 700;
-  color: #fff;
-  min-width: 45px;
-  text-align: center;
-}
-
-.timer-btn {
-  padding: 0.3rem 0.8rem !important;
-  font-size: 0.8rem !important;
-  border-radius: 20px !important;
-  text-transform: uppercase;
-  letter-spacing: 1px;
 }
 
 /* --- HERO SECTION --- */
@@ -116,6 +78,7 @@ h1 {
   margin-right: auto;
 }
 
+/* --- MAIN WORKSPACE PANEL --- */
 .main-wrapper {
   flex: 1;
   display: flex;
@@ -141,13 +104,15 @@ h1 {
   margin: 0 auto;
 }
 
+/* --- CONTROLS --- */
+/* Default (Mobile): Stacked Vertically */
 .controls {
   display: flex;
   flex-direction: column; 
   gap: 1rem;
   margin-bottom: 2rem;
   width: 100%;
-  max-width: 800px; 
+  max-width: 900px; /* Slightly wider to accommodate row layout */
   margin-left: auto;
   margin-right: auto;
 }
@@ -181,7 +146,7 @@ button {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100%; 
+  width: 100%; /* Default full width on mobile */
 }
 
 button.primary { 
@@ -196,6 +161,14 @@ button.secondary {
   border: 1px solid var(--primary-color); 
 }
 
+button:hover:not(:disabled) { 
+  transform: translateY(-3px); 
+  filter: brightness(1.2); 
+}
+
+button:disabled { opacity: 0.5; cursor: not-allowed; }
+
+/* --- FEATURES GRID --- */
 .features-preview {
   display: grid;
   grid-template-columns: 1fr; 
@@ -209,6 +182,15 @@ button.secondary {
   padding: 1.5rem;
   border-radius: 16px;
   border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: transform 0.3s ease, background 0.3s ease; /* Smooth transition */
+  cursor: default;
+}
+
+/* Hover Effect for Info Cards */
+.feature-card:hover {
+  transform: translateY(-5px);
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.2);
 }
 
 .feature-icon {
@@ -220,6 +202,33 @@ button.secondary {
 .feature-card h3 { margin: 0 0 0.5rem 0; color: #fff; font-size: 1.1rem; }
 .feature-card p { margin: 0; font-size: 0.9rem; color: #aaa; line-height: 1.5; }
 
+/* --- SUGGESTION CHIPS --- */
+.suggestions {
+  margin-top: 1.5rem;
+  font-size: 0.95rem;
+  color: #888;
+}
+
+.chip {
+  background: rgba(255,255,255,0.1);
+  padding: 6px 14px; /* Bigger touch target */
+  border-radius: 20px;
+  margin: 5px; /* Spacing around chips */
+  color: #e0e0e0;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: inline-block; /* Ensures they don't mash together */
+  border: 1px solid transparent;
+}
+
+.chip:hover { 
+  background: var(--primary-color); 
+  color: #000; 
+  transform: translateY(-2px);
+  border-color: var(--primary-color);
+}
+
+/* --- FLASHCARDS --- */
 .card-grid {
   display: grid;
   grid-template-columns: 1fr; 
@@ -256,6 +265,7 @@ button.secondary {
   text-transform: uppercase; letter-spacing: 1px; opacity: 0.7;
 }
 
+/* --- EXAM & SCORES --- */
 .exam-container {
   text-align: left;
   animation: fadeIn 0.5s ease;
@@ -290,11 +300,14 @@ button.secondary {
   border-radius: 8px;
   cursor: pointer;
   font-size: 0.95rem;
+  transition: all 0.2s;
 }
+.option-btn:hover { background: rgba(255,255,255,0.1); }
 .option-btn.selected { border-color: var(--primary-color); background: rgba(187, 134, 252, 0.15); color: white;}
 .option-btn.correct { border: 1px solid var(--success-color); background-color: rgba(76, 175, 80, 0.15); color: var(--success-color); font-weight: bold; }
 .option-btn.wrong { border: 1px solid var(--error-color); background-color: rgba(207, 102, 121, 0.15); color: var(--error-color); text-decoration: line-through; }
 
+/* --- EXPLANATION --- */
 .explanation-container {
   text-align: left;
   width: 100%;
@@ -318,29 +331,25 @@ button.secondary {
   border-top: 1px solid rgba(255,255,255,0.05);
 }
 
-/* --- DESKTOP RESTORATION --- */
+/* --- DESKTOP & TABLET RESTORATION (The Fix!) --- */
 @media (min-width: 768px) {
   .app-header { padding: 1rem 2rem; }
   h1 { font-size: 1.8rem; }
   
-  /* Restore larger timer for desktop */
-  .pomodoro {
-    padding: 0.5rem 1rem;
-    gap: 1rem;
-  }
-  .timer-display { font-size: 1.2rem; min-width: 60px; }
-  .timer-btn { padding: 0.4rem 1.2rem !important; font-size: 0.85rem !important; }
-
   .hero-title { font-size: 3.5rem; }
   .main-wrapper { padding: 8rem 2rem 4rem 2rem; }
   .content-panel { padding: 3rem; }
   
+  /* THIS IS THE FIX: Row layout for desktop */
   .controls { 
     flex-direction: row; 
-    flex-wrap: wrap; 
+    align-items: center;
+    gap: 1rem;
   }
   
-  button { width: auto; } 
+  /* Input takes available space, Buttons take auto width */
+  input { flex: 1; margin-bottom: 0; }
+  button { width: auto; padding: 1rem 1.5rem; } 
   
   .features-preview { grid-template-columns: repeat(3, 1fr); }
   
@@ -351,7 +360,25 @@ button.secondary {
   .explanation-text { font-size: 1.2rem; padding: 2rem; }
   
   .score-display { font-size: 5rem; }
+
+  .pomodoro {
+    padding: 0.5rem 1rem;
+    gap: 1rem;
+  }
+  .timer-display { font-size: 1.2rem; min-width: 60px; }
+  .timer-btn { padding: 0.4rem 1.2rem !important; font-size: 0.85rem !important; }
 }
+
+/* --- POMODORO (Default Mobile) --- */
+.pomodoro {
+  padding: 0.3rem 0.8rem !important;
+  gap: 0.5rem !important;
+  flex-shrink: 0;
+  white-space: nowrap;
+  flex-wrap: nowrap;
+}
+.timer-display { font-size: 1rem !important; min-width: 45px !important; }
+.timer-btn { padding: 0.3rem 0.8rem !important; font-size: 0.8rem !important; }
 
 @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 .spinner { width: 40px; height: 40px; border: 4px solid rgba(255,255,255,0.1); border-left-color: var(--primary-color); border-radius: 50%; animation: spin 1s linear infinite; margin: 2rem auto; }
