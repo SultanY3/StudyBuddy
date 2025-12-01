@@ -10,8 +10,8 @@ const FlashcardItem = ({ card }) => {
 
   return (
     <div className="flashcard-container">
-      <div 
-        className={`flashcard ${isFlipped ? 'flipped' : ''}`} 
+      <div
+        className={`flashcard ${isFlipped ? 'flipped' : ''}`}
         onClick={() => setIsFlipped(!isFlipped)}
       >
         <div className="flashcard-face flashcard-front">
@@ -54,14 +54,14 @@ const QuizExam = ({ quiz }) => {
         <div className="score-card" style={{ marginBottom: '0', paddingBottom: '0', background: 'transparent' }}>
           <h2>Exam Results</h2>
           <div className="score-display" style={{ fontSize: '5rem', color: '#4caf50', textShadow: '0 0 20px rgba(76,175,80,0.4)' }}>
-              {percentage}%
+            {percentage}%
           </div>
           <p style={{ fontSize: '1.2rem', color: '#b0b0b0' }}>
             You scored <strong style={{ color: 'white' }}>{score}</strong> out of {quiz.questions.length}
           </p>
-          <button 
-            className="primary" 
-            onClick={() => window.location.reload()} 
+          <button
+            className="primary"
+            onClick={() => window.location.reload()}
             style={{ margin: '20px 0', width: '100%' }}
           >
             Start New Session
@@ -83,7 +83,7 @@ const QuizExam = ({ quiz }) => {
                   {q.options.map((option, oIndex) => {
                     const isSelected = userAnswer === oIndex;
                     const isCorrect = q.correct_answer === oIndex;
-                    
+
                     let btnClass = "option-btn";
                     if (isCorrect) btnClass += " correct";
                     else if (isSelected) btnClass += " wrong";
@@ -112,15 +112,15 @@ const QuizExam = ({ quiz }) => {
   return (
     <div className="exam-container">
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
-        <h2 style={{margin:0}}>{quiz.topic} Exam</h2>
+        <h2 style={{ margin: 0 }}>{quiz.topic} Exam</h2>
         <span style={{ background: '#333', padding: '5px 10px', borderRadius: '8px', fontSize: '0.9rem' }}>
-            {quiz.questions.length} Qs
+          {quiz.questions.length} Qs
         </span>
       </div>
-      
+
       {quiz.questions.map((q, qIndex) => (
         <div key={q.id} className="question-block">
-          <h3 style={{marginTop:0}}>{qIndex + 1}. {q.text}</h3>
+          <h3 style={{ marginTop: 0 }}>{qIndex + 1}. {q.text}</h3>
           <div className="options-grid">
             {q.options.map((option, oIndex) => (
               <button
@@ -137,9 +137,9 @@ const QuizExam = ({ quiz }) => {
           </div>
         </div>
       ))}
-      
-      <button 
-        className="primary" 
+
+      <button
+        className="primary"
         style={{ width: '100%', marginTop: '2rem', padding: '1rem', fontSize: '1.1rem' }}
         onClick={handleSubmit}
         disabled={Object.keys(answers).length < quiz.questions.length}
@@ -154,7 +154,7 @@ const QuizExam = ({ quiz }) => {
 
 function App() {
   const [topic, setTopic] = useState('');
-  const [mode, setMode] = useState('idle'); 
+  const [mode, setMode] = useState('idle');
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
 
@@ -171,7 +171,9 @@ function App() {
   const fetchData = async (endpoint, modeName) => {
     setLoading(true);
     try {
-      const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://studybuddy-rptf.onrender.com';
+      // Temporarily hard-code for testing
+      const API_BASE_URL = 'https://studybuddy-rptf.onrender.com';
+      console.log('Using API URL:', API_BASE_URL); // Add this to verify
       const res = await axios.post(`${API_BASE_URL}/api/${endpoint}/`, { topic });
       setData(res.data);
       setMode(modeName);
@@ -196,8 +198,8 @@ function App() {
   return (
     <>
       <header className="app-header">
-        <h1 
-          onClick={goHome} 
+        <h1
+          onClick={goHome}
           style={{ cursor: 'pointer', userSelect: 'none' }}
           title="Go to Home"
         >
@@ -207,7 +209,7 @@ function App() {
       </header>
 
       <div className="main-wrapper">
-        
+
         {mode === 'idle' && !loading && (
           <div className="hero-section">
             <h1 className="hero-title">Master Any Topic</h1>
@@ -218,31 +220,31 @@ function App() {
         )}
 
         <div className="content-panel">
-          
+
           <div className="controls">
-            <input 
+            <input
               value={topic}
               onChange={(e) => setTopic(e.target.value)}
               placeholder="What do you want to learn today?"
               onKeyDown={(e) => e.key === 'Enter' && fetchData('generate-cards', 'flashcards')}
             />
             <button className="secondary" onClick={() => fetchData('generate-explanation', 'explanation')} disabled={loading || !topic}>
-               <i className="bi bi-lightbulb-fill" style={{ marginRight: '8px' }}></i>
-               Explain
+              <i className="bi bi-lightbulb-fill" style={{ marginRight: '8px' }}></i>
+              Explain
             </button>
             <button className="secondary" onClick={() => fetchData('generate-cards', 'flashcards')} disabled={loading || !topic}>
               <i className="bi bi-lightning-charge-fill" style={{ marginRight: '8px' }}></i>
               Flashcards
             </button>
             <button className="secondary" onClick={() => fetchData('generate-quiz', 'quiz')} disabled={loading || !topic} style={{ borderColor: '#03dac6', color: '#03dac6' }}>
-               <i className="bi bi-pencil-square" style={{ marginRight: '8px' }}></i>
-               Quiz
+              <i className="bi bi-pencil-square" style={{ marginRight: '8px' }}></i>
+              Quiz
             </button>
           </div>
 
           {mode === 'idle' && !loading && (
             <div className="suggestions">
-              Try: 
+              Try:
               <span className="chip" onClick={() => handleChipClick('Photosynthesis')}>Photosynthesis</span>
               <span className="chip" onClick={() => handleChipClick('French Revolution')}>French Revolution</span>
               <span className="chip" onClick={() => handleChipClick('Python Arrays')}>Python Arrays</span>
@@ -260,7 +262,7 @@ function App() {
             {!loading && mode === 'idle' && (
               <div className="features-preview">
                 <div className="feature-card">
-                   <i className="bi bi-lightbulb-fill feature-icon" style={{ color: '#cf6679' }}></i>
+                  <i className="bi bi-lightbulb-fill feature-icon" style={{ color: '#cf6679' }}></i>
                   <h3>Instant Explain</h3>
                   <p>Get concise, easy-to-understand summaries of complex topics in seconds.</p>
                 </div>
@@ -270,7 +272,7 @@ function App() {
                   <p>Instantly generate decks for any subject to boost your memory retention.</p>
                 </div>
                 <div className="feature-card">
-                   <i className="bi bi-card-checklist feature-icon" style={{ color: '#03dac6' }}></i>
+                  <i className="bi bi-card-checklist feature-icon" style={{ color: '#03dac6' }}></i>
                   <h3>Smart Quizzes</h3>
                   <p>Test your knowledge with multiple-choice questions and instant feedback.</p>
                 </div>
