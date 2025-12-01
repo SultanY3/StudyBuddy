@@ -50,6 +50,46 @@ h1 {
   letter-spacing: -1px;
 }
 
+/* --- POMODORO TIMER (Base/Mobile Styles) --- */
+/* Moved UP so Desktop styles can override it later */
+.pomodoro {
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 50px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+  white-space: nowrap;
+  /* Mobile dimensions */
+  padding: 0.3rem 0.8rem;
+  gap: 0.5rem;
+}
+
+.pomodoro:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: var(--primary-color);
+}
+
+.timer-display {
+  font-family: 'JetBrains Mono', monospace; 
+  font-weight: 700;
+  color: #fff;
+  text-align: center;
+  /* Mobile font size */
+  font-size: 1rem;
+  min-width: 45px;
+}
+
+.timer-btn {
+  border-radius: 20px !important;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  /* Mobile button size */
+  padding: 0.3rem 0.8rem !important;
+  font-size: 0.8rem !important;
+}
+
 /* --- HERO SECTION --- */
 .hero-section {
   text-align: center;
@@ -105,14 +145,13 @@ h1 {
 }
 
 /* --- CONTROLS --- */
-/* Default (Mobile): Stacked Vertically */
 .controls {
   display: flex;
   flex-direction: column; 
   gap: 1rem;
   margin-bottom: 2rem;
   width: 100%;
-  max-width: 900px; /* Slightly wider to accommodate row layout */
+  max-width: 900px; 
   margin-left: auto;
   margin-right: auto;
 }
@@ -146,7 +185,7 @@ button {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100%; /* Default full width on mobile */
+  width: 100%; 
 }
 
 button.primary { 
@@ -182,11 +221,10 @@ button:disabled { opacity: 0.5; cursor: not-allowed; }
   padding: 1.5rem;
   border-radius: 16px;
   border: 1px solid rgba(255, 255, 255, 0.05);
-  transition: transform 0.3s ease, background 0.3s ease; /* Smooth transition */
+  transition: transform 0.3s ease, background 0.3s ease;
   cursor: default;
 }
 
-/* Hover Effect for Info Cards */
 .feature-card:hover {
   transform: translateY(-5px);
   background: rgba(255, 255, 255, 0.08);
@@ -211,13 +249,13 @@ button:disabled { opacity: 0.5; cursor: not-allowed; }
 
 .chip {
   background: rgba(255,255,255,0.1);
-  padding: 6px 14px; /* Bigger touch target */
+  padding: 6px 14px;
   border-radius: 20px;
-  margin: 5px; /* Spacing around chips */
+  margin: 5px;
   color: #e0e0e0;
   cursor: pointer;
   transition: all 0.2s;
-  display: inline-block; /* Ensures they don't mash together */
+  display: inline-block;
   border: 1px solid transparent;
 }
 
@@ -331,23 +369,29 @@ button:disabled { opacity: 0.5; cursor: not-allowed; }
   border-top: 1px solid rgba(255,255,255,0.05);
 }
 
-/* --- DESKTOP & TABLET RESTORATION (The Fix!) --- */
+/* --- DESKTOP & TABLET RESTORATION (Media Queries) --- */
 @media (min-width: 768px) {
   .app-header { padding: 1rem 2rem; }
   h1 { font-size: 1.8rem; }
   
+  /* RESTORED DESKTOP TIMER STYLES */
+  .pomodoro {
+    padding: 0.5rem 1rem;
+    gap: 1rem;
+  }
+  .timer-display { font-size: 1.2rem; min-width: 60px; }
+  .timer-btn { padding: 0.4rem 1.2rem !important; font-size: 0.85rem !important; }
+
   .hero-title { font-size: 3.5rem; }
   .main-wrapper { padding: 8rem 2rem 4rem 2rem; }
   .content-panel { padding: 3rem; }
   
-  /* THIS IS THE FIX: Row layout for desktop */
   .controls { 
     flex-direction: row; 
     align-items: center;
     gap: 1rem;
   }
   
-  /* Input takes available space, Buttons take auto width */
   input { flex: 1; margin-bottom: 0; }
   button { width: auto; padding: 1rem 1.5rem; } 
   
@@ -360,25 +404,7 @@ button:disabled { opacity: 0.5; cursor: not-allowed; }
   .explanation-text { font-size: 1.2rem; padding: 2rem; }
   
   .score-display { font-size: 5rem; }
-
-  .pomodoro {
-    padding: 0.5rem 1rem;
-    gap: 1rem;
-  }
-  .timer-display { font-size: 1.2rem; min-width: 60px; }
-  .timer-btn { padding: 0.4rem 1.2rem !important; font-size: 0.85rem !important; }
 }
-
-/* --- POMODORO (Default Mobile) --- */
-.pomodoro {
-  padding: 0.3rem 0.8rem !important;
-  gap: 0.5rem !important;
-  flex-shrink: 0;
-  white-space: nowrap;
-  flex-wrap: nowrap;
-}
-.timer-display { font-size: 1rem !important; min-width: 45px !important; }
-.timer-btn { padding: 0.3rem 0.8rem !important; font-size: 0.8rem !important; }
 
 @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 .spinner { width: 40px; height: 40px; border: 4px solid rgba(255,255,255,0.1); border-left-color: var(--primary-color); border-radius: 50%; animation: spin 1s linear infinite; margin: 2rem auto; }
