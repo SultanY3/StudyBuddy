@@ -171,7 +171,8 @@ function App() {
   const fetchData = async (endpoint, modeName) => {
     setLoading(true);
     try {
-      const res = await axios.post(`https://studybuddy-rptf.onrender.com/api/${endpoint}/`, { topic });
+      const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://studybuddy-rptf.onrender.com';
+      const res = await axios.post(`${API_BASE_URL}/api/${endpoint}/`, { topic });
       setData(res.data);
       setMode(modeName);
     } catch (err) {
