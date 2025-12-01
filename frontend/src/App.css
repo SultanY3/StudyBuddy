@@ -27,7 +27,7 @@ body {
 
 .app-header {
   width: 100%;
-  padding: 1rem;
+  padding: 0.8rem 1rem; /* Slightly reduced padding */
   box-sizing: border-box;
   display: flex;
   justify-content: space-between;
@@ -39,16 +39,56 @@ body {
   left: 0;
   z-index: 100;
   backdrop-filter: blur(5px);
+  gap: 0.5rem; /* Ensure space between title and timer */
 }
 
 h1 { 
-  font-size: 1.5rem; 
+  font-size: 1.4rem; /* Slightly smaller for mobile safety */
   margin: 0;
   color: var(--primary-color);
   font-weight: 800;
   letter-spacing: -1px;
+  flex-shrink: 1; /* Allow title to shrink if needed */
 }
 
+/* --- POMODORO TIMER STYLES --- */
+.pomodoro {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem; /* Reduced gap */
+  background: rgba(255, 255, 255, 0.05);
+  padding: 0.4rem 0.8rem;
+  border-radius: 50px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+  flex-shrink: 0; /* Prevent timer from squishing */
+  white-space: nowrap; /* Force single line */
+  flex-wrap: nowrap; /* Force single line */
+}
+
+.pomodoro:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: var(--primary-color);
+}
+
+.timer-display {
+  font-family: 'JetBrains Mono', monospace; 
+  font-size: 1rem;
+  font-weight: 700;
+  color: #fff;
+  min-width: 45px;
+  text-align: center;
+}
+
+.timer-btn {
+  padding: 0.3rem 0.8rem !important;
+  font-size: 0.8rem !important;
+  border-radius: 20px !important;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* --- HERO SECTION --- */
 .hero-section {
   text-align: center;
   margin-bottom: 2rem;
@@ -278,10 +318,19 @@ button.secondary {
   border-top: 1px solid rgba(255,255,255,0.05);
 }
 
+/* --- DESKTOP RESTORATION --- */
 @media (min-width: 768px) {
   .app-header { padding: 1rem 2rem; }
   h1 { font-size: 1.8rem; }
   
+  /* Restore larger timer for desktop */
+  .pomodoro {
+    padding: 0.5rem 1rem;
+    gap: 1rem;
+  }
+  .timer-display { font-size: 1.2rem; min-width: 60px; }
+  .timer-btn { padding: 0.4rem 1.2rem !important; font-size: 0.85rem !important; }
+
   .hero-title { font-size: 3.5rem; }
   .main-wrapper { padding: 8rem 2rem 4rem 2rem; }
   .content-panel { padding: 3rem; }
@@ -303,13 +352,6 @@ button.secondary {
   
   .score-display { font-size: 5rem; }
 }
-
-.pomodoro {
-  padding: 0.3rem 0.8rem !important;
-  gap: 0.5rem !important;
-}
-.timer-display { font-size: 1rem !important; min-width: 50px !important; }
-.timer-btn { padding: 0.3rem 0.8rem !important; font-size: 0.8rem !important; }
 
 @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 .spinner { width: 40px; height: 40px; border: 4px solid rgba(255,255,255,0.1); border-left-color: var(--primary-color); border-radius: 50%; animation: spin 1s linear infinite; margin: 2rem auto; }
