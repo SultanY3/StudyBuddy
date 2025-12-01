@@ -29,7 +29,6 @@ SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
 DEBUG = os.getenv('DEBUG') == 'True'
 
 GOOGLE_API_KEY = os.getenv('GOOGLE_API_KEY')
-
 # Application definition
 
 INSTALLED_APPS = [

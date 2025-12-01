@@ -171,7 +171,7 @@ function App() {
   const fetchData = async (endpoint, modeName) => {
     setLoading(true);
     try {
-      const res = await axios.post(`http://127.0.0.1:8000/api/${endpoint}/`, { topic });
+      const res = await axios.post(`https://studybuddy-rptf.onrender.com/api/${endpoint}/`, { topic });
       setData(res.data);
       setMode(modeName);
     } catch (err) {
